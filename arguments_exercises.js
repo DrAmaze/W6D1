@@ -67,44 +67,34 @@ function curriedSum(numArgs){
 // context = where we want to call it (breakfast)
 // curry.apply(breakfast, args)
 
-Function.prototype.applyCurriedSum = function curry(context, numArgs){
-  let args = Array.from(arguments);
-  let numbers = [];
+Function.prototype.applyCurry = function curry(numArgs) {
+  let args = [];
+  let that = this;
 
-  function _curriedSum(num){
-    numbers.push(num);
-    let total = 0;
+  function _curry(arg) {
+    args.push(arg);
 
-    if (numbers.length === numArgs){
-      numbers.forEach(function(n){
-        total += n;
-      });
-      return total;
+    if (args.length === numArgs){
+      return that.apply(null, args);
     } else {
-      return _curriedSum;
+      return _curry;
     }
   }
 
-  return _curriedSum.apply(context, args.join(numArgs));
+  return _curry;
 };
 
-Function.prototype.spreadCurriedSum = function curry(numArgs, ...args) {
-  let numbers = [];
+Function.prototype.spreadCurry = function curry(numArgs) {
+  let args = [];
+  let that = this;
 
-  function _curriedSum(num) {
-    numbers.push(num);
-    if (numbers.length === numArgs) {
-      let total = 0;
-
-      numbers.forEach(function(n){
-        total += n;
-      });
-
-      return total;
-
+  function _curry(arg) {
+    args.push(arg);
+    if (args.length === numArgs) {
+      that(...args);
     } else {
-      return _curriedSum;
+      return _curry;
     }
   }
-  return _curriedSum;
+  return _curry;
 };
