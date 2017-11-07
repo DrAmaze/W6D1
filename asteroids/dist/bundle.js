@@ -73,17 +73,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 
 
-
-function component() {
-
-  var element = document.createElement('div');
-
-  element.innerHTML = __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.join(['Hello', 'Webpack'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+const App = __webpack_require__(4);
 
 
 /***/ }),
@@ -17231,6 +17221,26 @@ module.exports = function(module) {
 	}
 	return module;
 };
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+function MovingObject(options){
+  this.pos = options.pos;
+  this.vel = options.vel;
+  this.radius = options.radius;
+  this.color = options.color;
+}
+
+MovingObject.prototype.draw = function draw(ctx) {
+  ctx.beginPath();
+  ctx.arc(50);
+  ctx.fillStyle = "blue";
+};
+
+module.exports = MovingObject;
 
 
 /***/ })
